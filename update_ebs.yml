@@ -1,0 +1,16 @@
+---
+- name: Gather facts about the EC2 instance
+  hosts: ec2
+  gather_facts: no
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3  # Specify the Python interpreter path
+  tasks:
+    - name: Add tags to the EC2 instance
+      ec2_tag:
+        resource: "i-0423abb36e1bd5842"
+        region: "us-east-1"
+        state: present
+        tags:
+          Name: wordpress_prod_nv
+          Environment: ProductionNew  # Add your desired tags here
